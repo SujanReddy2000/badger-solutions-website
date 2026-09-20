@@ -88,12 +88,38 @@
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"Badger Solutions",
-    "url":"https://badgersolutions.in/",
-    "logo":"https://badgersolutions.in/ChatGPT%20Image%20Sep%2020%2C%202026%2C%2006_45_54%20PM.png",
-    "email":"hello@badgersolutions.in",
-    "description":"Digital marketing and software solutions company building websites, digital products, brand experiences, SEO and growth campaigns."
+    "@graph":[
+      {
+        "@type":"Organization",
+        "@id":"https://badgersolutions.in/#organization",
+        "name":"Badger Solutions",
+        "url":"https://badgersolutions.in/",
+        "logo":{
+          "@type":"ImageObject",
+          "url":"https://badgersolutions.in/ChatGPT%20Image%20Sep%2020%2C%202026%2C%2006_45_54%20PM.png"
+        },
+        "email":"hello@badgersolutions.in",
+        "description":"Digital marketing and software solutions company building websites, digital products, brand experiences, SEO and growth campaigns."
+      },
+      {
+        "@type":"WebSite",
+        "@id":"https://badgersolutions.in/#website",
+        "url":"https://badgersolutions.in/",
+        "name":"Badger Solutions",
+        "publisher":{"@id":"https://badgersolutions.in/#organization"},
+        "inLanguage":"en"
+      },
+      {
+        "@type":"WebPage",
+        "@id":"https://badgersolutions.in/#webpage",
+        "url":"https://badgersolutions.in/",
+        "name":"Badger Solutions | Digital Marketing & Software Solutions",
+        "isPartOf":{"@id":"https://badgersolutions.in/#website"},
+        "about":{"@id":"https://badgersolutions.in/#organization"},
+        "description":"Badger Solutions builds premium websites, digital products, brand experiences, SEO and growth campaigns.",
+        "inLanguage":"en"
+      }
+    ]
   }
   </script>
 </head>
