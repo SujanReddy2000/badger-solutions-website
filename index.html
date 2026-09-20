@@ -38,16 +38,6 @@
     .hero-mark{font-size:clamp(4rem,10vw,8rem);font-weight:950;letter-spacing:-.1em;color:var(--lime);filter:drop-shadow(0 0 30px rgba(200,248,8,.2));z-index:2}
     .dot{position:absolute;width:12px;height:12px;background:var(--lime);border-radius:50%;top:8%;left:48%;box-shadow:0 0 20px var(--lime)}
     @keyframes spin{to{transform:rotate(360deg)}}
-    @keyframes blink{0%,42%,46%,100%{transform:scaleY(1)}44%{transform:scaleY(.08)}}
-    @keyframes floatMark{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-    .badger-face{position:relative;width:48%;aspect-ratio:1;z-index:3;animation:floatMark 5s ease-in-out infinite}
-    .badger-head{position:absolute;inset:13% 12% 8%;background:var(--lime);clip-path:polygon(18% 0,38% 15%,62% 15%,82% 0,100% 28%,88% 78%,50% 100%,12% 78%,0 28%)}
-    .badger-mask{position:absolute;inset:27% 21% 18%;background:#050505;clip-path:polygon(0 0,42% 18%,50% 43%,58% 18%,100% 0,78% 72%,50% 100%,22% 72%)}
-    .badger-eye{position:absolute;top:42%;width:15%;height:7%;background:var(--lime);border-radius:60% 40% 60% 40%;box-shadow:0 0 16px rgba(200,248,8,.75);animation:blink 4.8s infinite;transform-origin:center}
-    .badger-eye.left{left:29%;transform:rotate(12deg)}.badger-eye.right{right:29%;transform:rotate(-12deg);animation-delay:.08s}
-    .badger-nose{position:absolute;left:43%;top:67%;width:14%;height:10%;background:var(--lime);clip-path:polygon(50% 100%,0 0,100% 0)}
-    .hero-copy,.hero-actions,.eyebrow,.hero h1{will-change:transform,opacity}
-    .hero .eyebrow{animation:heroIn .7s ease both}.hero h1{animation:heroIn .8s .12s ease both}.hero-copy{animation:heroIn .8s .24s ease both}.hero-actions{animation:heroIn .8s .36s ease both}@keyframes heroIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
     .marquee{border-block:1px solid var(--line);overflow:hidden;background:#090909}.track{display:flex;width:max-content;animation:scroll 24s linear infinite;padding:19px 0}.track span{font-weight:850;font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;color:#cfcfcf}.track span::after{content:"✦";color:var(--lime);padding:0 28px}@keyframes scroll{to{transform:translateX(-50%)}}
     .section-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:55px}.section-head .lead{max-width:440px}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -69,7 +59,7 @@
     .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}.reveal.visible{opacity:1;transform:none}
     @media(max-width:900px){section{padding:85px 0}.nav-links{display:none;position:absolute;top:82px;left:0;right:0;background:#080808;border-bottom:1px solid var(--line);padding:24px;flex-direction:column;align-items:flex-start}.nav-links.open{display:flex}.nav-cta{display:none}.menu-btn{display:block}.hero-grid,.split,.why,.contact-grid{grid-template-columns:1fr}.hero-art{max-width:520px;width:100%;margin:10px auto}.section-head{display:block}.industries{grid-template-columns:1fr 1fr}.industry:nth-child(2){border-right:0}.industry:nth-child(-n+2){border-bottom:1px solid var(--line)}.sticky{position:static}.process-grid{grid-template-columns:1fr 1fr;row-gap:30px}.showcase-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}.cta-box{display:block}.cta-box .btn{margin-top:30px}}
     @media(max-width:560px){.container{width:min(calc(100% - 28px),var(--max))}.nav-wrap{height:92px}.brand img{width:245px;max-height:68px}.hero{padding-top:130px}.hero h1{font-size:clamp(3.2rem,17vw,5rem)}.hero-art{display:none}.grid-3,.industries,.metric-wrap,.process-grid,form{grid-template-columns:1fr}.industry{border-right:0!important;border-bottom:1px solid var(--line)!important}.industry:last-child{border-bottom:0!important}.step{padding-bottom:25px}.process-grid{border-top:0}.step b{margin-top:0}.project{min-height:330px}.field.full,form .btn{grid-column:auto}.footer-bottom{display:block}.footer-bottom span{display:block;margin-top:8px}.cta-box{border-radius:22px}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orbit,.track,.badger-face,.badger-eye,.hero .eyebrow,.hero h1,.hero-copy,.hero-actions{animation:none}.reveal{opacity:1;transform:none;transition:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orbit,.track{animation:none}.reveal{opacity:1;transform:none;transition:none}}
   </style>
 </head>
 <body>
@@ -83,7 +73,7 @@
   </header>
 
   <main>
-    <section class="hero" id="home"><div class="container hero-grid"><div><span class="eyebrow">Digital products. Real growth.</span><h1>Build bold.<br><span class="lime">Grow smarter.</span></h1><p class="hero-copy">We create high-performance websites, digital experiences, and growth systems for ambitious brands ready to lead their market.</p><div class="hero-actions"><a class="btn btn-primary" href="#contact">Let’s build together <span>↗</span></a><a class="btn btn-ghost" href="#work">Explore our work <span>↓</span></a></div></div><div class="hero-art" aria-hidden="true"><div class="orbit"><i class="dot"></i></div><div class="orbit"></div><div class="badger-face"><div class="badger-head"></div><div class="badger-mask"></div><i class="badger-eye left"></i><i class="badger-eye right"></i><i class="badger-nose"></i></div></div></div></section>
+    <section class="hero" id="home"><div class="container hero-grid"><div><span class="eyebrow">Digital products. Real growth.</span><h1>Build bold.<br><span class="lime">Grow smarter.</span></h1><p class="hero-copy">We create high-performance websites, digital experiences, and growth systems for ambitious brands ready to lead their market.</p><div class="hero-actions"><a class="btn btn-primary" href="#contact">Let’s build together <span>↗</span></a><a class="btn btn-ghost" href="#work">Explore our work <span>↓</span></a></div></div><div class="hero-art" aria-hidden="true"><div class="orbit"><i class="dot"></i></div><div class="orbit"></div><div class="hero-mark">BS.</div></div></div></section>
 
     <div class="marquee" aria-hidden="true"><div class="track"><span>Web Development</span><span>UI/UX Design</span><span>Brand Strategy</span><span>Digital Marketing</span><span>Product Engineering</span><span>Web Development</span><span>UI/UX Design</span><span>Brand Strategy</span><span>Digital Marketing</span><span>Product Engineering</span></div></div>
 
