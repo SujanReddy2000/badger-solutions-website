@@ -227,7 +227,7 @@
     document.getElementById('year').textContent=new Date().getFullYear();
     const quoteModal=document.getElementById('quoteModal'),quotePanel=quoteModal.querySelector('.quote-panel');
     let quoteReturnFocus=null,quoteTimer;
-    const quoteFocusable=()=>[...quoteModal.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled])')];
+    const quoteFocusable=()=>[...quoteModal.querySelectorAll('button:not([disabled]):not([tabindex="-1"]),input:not([disabled]),select:not([disabled]),textarea:not([disabled])')];
     const openQuote=()=>{clearTimeout(quoteTimer);quoteReturnFocus=document.activeElement;quoteModal.hidden=false;document.body.style.overflow='hidden';requestAnimationFrame(()=>{quoteModal.classList.add('open');quotePanel.focus()});sessionStorage.setItem('badgerQuoteShown','1')};
     const closeQuote=()=>{localStorage.setItem('badgerQuoteDismissed','1');quoteModal.classList.remove('open');document.body.style.overflow='';setTimeout(()=>{quoteModal.hidden=true;quoteReturnFocus?.focus()},380)};
     document.querySelectorAll('[data-quote-open]').forEach(button=>button.addEventListener('click',openQuote));
