@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "configured": false,
+  "emailHash": "",
+  "passwordSalt": "",
+  "passwordHash": "",
+  "iterations": 210000,
+  "updatedAt": ""
+}
