@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#050505">
+  <link rel="shortcut icon" href="/favicon.ico?v=7">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png?v=7">
+  <title>Blog Dashboard | Badger Solutions</title>
+  <style>
+    :root{--bg:#050505;--panel:#0d0d0d;--soft:#141414;--lime:#c8f808;--text:#f4f4f1;--muted:#969696;--line:#242424;--danger:#ff6262;--radius:22px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 84% 10%,rgba(200,248,8,.09),transparent 30%);z-index:-1}
+    button,input,select,textarea{font:inherit}button,a{color:inherit}a{text-decoration:none}
+    :where(button,a,input,select,textarea):focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+    .app{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+    .sidebar{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);background:rgba(8,8,8,.92);backdrop-filter:blur(20px);padding:24px 18px;display:flex;flex-direction:column;z-index:50}
+    .brand{display:flex;align-items:center;height:58px;padding:4px 8px 20px}.brand img{width:190px;max-height:50px;object-fit:contain;object-position:left center}
+    .nav-label{padding:18px 12px 8px;color:#636363;font-size:.67rem;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
+    .side-nav{display:grid;gap:6px}.side-nav button,.side-nav a{border:1px solid transparent;background:transparent;border-radius:13px;padding:12px 14px;text-align:left;display:flex;align-items:center;gap:12px;cursor:pointer;color:#bcbcbc;transition:.22s;font-size:.9rem}
+    .side-nav button:hover,.side-nav a:hover{background:#111;color:#fff}.side-nav .active{border-color:rgba(200,248,8,.28);background:rgba(200,248,8,.08);color:var(--lime)}
+    .ico{width:26px;height:26px;border-radius:8px;background:#161616;display:grid;place-items:center;font-size:.8rem;font-weight:900;flex:0 0 auto}.active .ico{background:var(--lime);color:#050505}
+    .sidebar-foot{margin-top:auto;border-top:1px solid var(--line);padding-top:18px}.profile{display:flex;gap:11px;align-items:center;padding:10px}.avatar{width:38px;height:38px;border-radius:12px;background:var(--lime);color:#050505;display:grid;place-items:center;font-weight:950}.profile strong{display:block;font-size:.84rem}.profile span{display:block;color:#777;font-size:.72rem;margin-top:2px}
+    .main{min-width:0;padding:26px clamp(18px,3vw,46px) 60px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:62px;margin-bottom:28px}.topbar-left{display:flex;align-items:center;gap:12px}.mobile-menu{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:#0c0c0c;color:#fff}.crumb{color:#777;font-size:.82rem}.crumb b{color:#d8d8d8}.top-actions{display:flex;gap:10px;align-items:center}
+    .btn{border:1px solid #303030;border-radius:999px;min-height:44px;padding:0 18px;background:#0d0d0d;color:#ededed;font-weight:800;cursor:pointer;transition:.25s;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{transform:translateY(-2px);border-color:var(--lime)}.btn-primary{background:var(--lime);border-color:var(--lime);color:#050505}.btn-primary:hover{background:#ddff55;box-shadow:0 12px 28px rgba(200,248,8,.13)}
+    .mode-note{border:1px solid rgba(200,248,8,.22);background:rgba(200,248,8,.06);border-radius:16px;padding:13px 16px;color:#c6caaf;font-size:.82rem;display:flex;gap:9px;align-items:flex-start;margin-bottom:28px}.mode-note b{color:var(--lime)}
+    .hero{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:26px}.eyebrow{color:var(--lime);font-weight:900;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase}.hero h1{font-size:clamp(2.1rem,5vw,4.4rem);line-height:.95;letter-spacing:-.055em;margin:12px 0 10px}.hero p{color:var(--muted);max-width:620px;font-size:.96rem}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:26px 0}.stat{background:linear-gradient(145deg,#101010,#090909);border:1px solid var(--line);border-radius:20px;padding:21px;position:relative;overflow:hidden}.stat::after{content:"";position:absolute;width:80px;height:80px;border-radius:50%;right:-35px;bottom:-35px;background:var(--lime);filter:blur(55px);opacity:.09}.stat small{color:#777;font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;font-weight:800}.stat strong{display:block;font-size:2rem;line-height:1;margin-top:12px;letter-spacing:-.05em}.stat span{display:block;color:#777;font-size:.74rem;margin-top:9px}.stat strong em{font-style:normal;color:var(--lime)}
+    .workspace{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px}.panel{background:rgba(12,12,12,.86);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}.panel-head{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:18px}.panel-head h2{font-size:1.05rem;letter-spacing:-.02em}.panel-head p{font-size:.75rem;color:#747474;margin-top:3px}
+    .filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:16px 20px;border-bottom:1px solid var(--line)}.search{min-width:220px;flex:1;position:relative}.search input,.filters select{width:100%;height:42px;border:1px solid #2a2a2a;border-radius:12px;background:#090909;color:#eee;padding:0 13px;outline:none}.search input{padding-left:38px}.search::before{content:"⌕";position:absolute;left:14px;top:8px;color:#727272}.filters select{width:auto;min-width:126px}
+    .table-wrap{overflow:auto}.posts{width:100%;border-collapse:collapse;min-width:700px}.posts th{padding:13px 20px;text-align:left;color:#646464;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;border-bottom:1px solid var(--line)}.posts td{padding:16px 20px;border-bottom:1px solid #1b1b1b;vertical-align:middle;font-size:.84rem}.posts tbody tr:hover{background:#0f0f0f}.title-cell{max-width:320px}.post-title{font-weight:820;color:#f2f2f2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.slug{color:#666;font-size:.72rem;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:#151515;border:1px solid #292929;color:#bcbcbc;font-size:.68rem;font-weight:800}.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:#666}.badge.published{color:#d9ef8a;border-color:rgba(200,248,8,.25);background:rgba(200,248,8,.06)}.badge.published::before{background:var(--lime);box-shadow:0 0 8px var(--lime)}.action-set{display:flex;gap:6px}.icon-btn{width:34px;height:34px;border:1px solid #292929;border-radius:10px;background:#0a0a0a;color:#aaa;cursor:pointer}.icon-btn:hover{border-color:var(--lime);color:var(--lime)}.icon-btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+    .empty{padding:50px 20px;text-align:center;color:#757575}.empty b{display:block;color:#d8d8d8;font-size:1rem;margin-bottom:5px}
+    .side-stack{display:grid;gap:18px;align-content:start}.mini-list{padding:8px 18px 18px}.mini-item{display:grid;grid-template-columns:42px 1fr auto;gap:11px;align-items:center;padding:13px 0;border-bottom:1px solid #1e1e1e}.mini-item:last-child{border:0}.mini-num{width:40px;height:40px;border-radius:12px;background:#151515;display:grid;place-items:center;color:var(--lime);font-size:.75rem;font-weight:900}.mini-item strong{font-size:.8rem;display:block}.mini-item span{font-size:.7rem;color:#6f6f6f}.mini-item em{font-style:normal;font-size:.72rem;color:#999}.quick{padding:18px;display:grid;gap:10px}.quick button,.quick a{width:100%;min-height:45px;border:1px solid #292929;border-radius:13px;background:#0b0b0b;color:#cfcfcf;text-align:left;padding:0 14px;cursor:pointer;font-weight:760}.quick button:hover,.quick a:hover{border-color:var(--lime);color:var(--lime)}
+    dialog{width:min(760px,calc(100% - 28px));max-height:92vh;border:1px solid #2b2b2b;border-radius:24px;background:#0b0b0b;color:#fff;padding:0;box-shadow:0 40px 120px rgba(0,0,0,.75)}dialog::backdrop{background:rgba(0,0,0,.76);backdrop-filter:blur(9px)}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line)}.modal-head h2{font-size:1.15rem}.close{width:38px;height:38px;border:1px solid #292929;border-radius:50%;background:#111;color:#fff;cursor:pointer}.form{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:.73rem;color:#919191;font-weight:800}.field input,.field select,.field textarea{width:100%;border:1px solid #2a2a2a;border-radius:12px;background:#070707;color:#f2f2f2;padding:11px 13px;outline:none}.field textarea{min-height:120px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--lime)}.modal-foot{grid-column:1/-1;display:flex;justify-content:flex-end;gap:10px;padding-top:6px}.hint{font-size:.68rem;color:#666}
+    .toast{position:fixed;right:22px;bottom:22px;z-index:120;transform:translateY(30px);opacity:0;pointer-events:none;background:#111;border:1px solid rgba(200,248,8,.35);border-radius:14px;padding:12px 15px;color:#e9f6bd;font-size:.82rem;transition:.3s}.toast.show{transform:none;opacity:1}
+    .overlay{display:none}
+    @media(max-width:1120px){.workspace{grid-template-columns:1fr}.side-stack{grid-template-columns:1fr 1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:780px){.app{grid-template-columns:1fr}.sidebar{position:fixed;left:0;top:0;transform:translateX(-102%);width:280px;transition:.28s;box-shadow:30px 0 70px rgba(0,0,0,.5)}.sidebar.open{transform:none}.overlay{display:block;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40;opacity:0;pointer-events:none;transition:.25s}.overlay.open{opacity:1;pointer-events:auto}.mobile-menu{display:block}.main{padding-inline:16px}.top-actions .btn:not(.btn-primary){display:none}.hero{align-items:flex-start;flex-direction:column}.stats{grid-template-columns:1fr 1fr}.side-stack{grid-template-columns:1fr}.form{grid-template-columns:1fr}.field.full{grid-column:auto}.modal-foot{grid-column:auto}}
+    @media(max-width:470px){.stats{grid-template-columns:1fr}.hero h1{font-size:2.6rem}.topbar{margin-bottom:18px}.mode-note{font-size:.76rem}.btn{padding-inline:14px}.filters select{flex:1}.search{min-width:100%}}
+  </style>
+</head>
+<body>
+<div class="overlay" id="overlay"></div>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html" aria-label="Badger Solutions home"><img src="ChatGPT%20Image%20Sep%2020%2C%202026%2C%2006_45_54%20PM.png" alt="Badger Solutions"></a>
+    <div class="nav-label">Workspace</div>
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <button class="active" type="button"><span class="ico">D</span>Dashboard</button>
+      <button type="button" id="navPosts"><span class="ico">P</span>All Posts</button>
+      <button type="button" id="navCategories"><span class="ico">C</span>Categories</button>
+      <button type="button"><span class="ico">M</span>Media</button>
+      <button type="button"><span class="ico">S</span>SEO</button>
+    </nav>
+    <div class="nav-label">Website</div>
+    <nav class="side-nav"><a href="blog.html" target="_blank"><span class="ico">↗</span>View Blog</a><a href="index.html"><span class="ico">⌂</span>Main Website</a></nav>
+    <div class="sidebar-foot"><div class="profile"><div class="avatar">BS</div><div><strong>Badger Solutions</strong><span>Blog workspace</span></div></div></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-left"><button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open menu">☰</button><div class="crumb">Badger Solutions / <b>Blog Dashboard</b></div></div>
+      <div class="top-actions"><a class="btn" href="blog.html" target="_blank">View blog ↗</a><button class="btn btn-primary" id="newPostTop" type="button">+ New post</button></div>
+    </header>
+
+    <div class="mode-note"><span>●</span><div><b>Prototype mode:</b> this dashboard is fully interactive, but posts are stored only in this browser using localStorage. Connect a real CMS/database before using it as a multi-user production admin.</div></div>
+
+    <section class="hero">
+      <div><span class="eyebrow">Badger Insights</span><h1>Content command<br><span style="color:var(--lime)">center.</span></h1><p>Create, organize and preview Badger Solutions articles from one clean workspace.</p></div>
+      <button class="btn btn-primary" id="newPostHero" type="button">Create article ↗</button>
+    </section>
+
+    <section class="stats" aria-label="Blog overview">
+      <article class="stat"><small>Total posts</small><strong id="totalStat">0</strong><span>All articles in this browser</span></article>
+      <article class="stat"><small>Published</small><strong id="publishedStat"><em>0</em></strong><span>Visible on the blog page</span></article>
+      <article class="stat"><small>Drafts</small><strong id="draftStat">0</strong><span>Still being prepared</span></article>
+      <article class="stat"><small>Categories</small><strong id="categoryStat">0</strong><span>Content topics in use</span></article>
+    </section>
+
+    <section class="workspace">
+      <div class="panel" id="postsPanel">
+        <div class="panel-head"><div><h2>Articles</h2><p>Manage titles, categories and publishing status.</p></div><button class="btn" id="exportBtn" type="button">Export JSON</button></div>
+        <div class="filters"><div class="search"><input id="searchInput" type="search" placeholder="Search articles..."></div><select id="statusFilter" aria-label="Filter by status"><option value="all">All status</option><option value="published">Published</option><option value="draft">Draft</option></select><select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option></select></div>
+        <div class="table-wrap"><table class="posts"><thead><tr><th>Article</th><th>Category</th><th>Status</th><th>Updated</th><th>Actions</th></tr></thead><tbody id="postRows"></tbody></table><div class="empty" id="emptyState" hidden><b>No articles found</b>Try another filter or create a new post.</div></div>
+      </div>
+
+      <aside class="side-stack">
+        <section class="panel"><div class="panel-head"><div><h2>Categories</h2><p>Current content mix</p></div></div><div class="mini-list" id="categoryList"></div></section>
+        <section class="panel"><div class="panel-head"><div><h2>Quick actions</h2><p>Common publishing tasks</p></div></div><div class="quick"><button id="quickNew" type="button">+ Write a new article</button><a href="blog.html" target="_blank">Preview public blog ↗</a><button id="resetDemo" type="button">Restore demo posts</button></div></section>
+      </aside>
+    </section>
+  </main>
+</div>
+
+<dialog id="postDialog">
+  <div class="modal-head"><div><span class="eyebrow">Article editor</span><h2 id="dialogTitle">Create post</h2></div><button class="close" id="closeDialog" type="button" aria-label="Close">×</button></div>
+  <form class="form" id="postForm">
+    <input type="hidden" id="postId">
+    <div class="field full"><label for="title">Article title</label><input id="title" required maxlength="120" placeholder="e.g. How a strong website turns attention into leads"><span class="hint">Keep it clear, specific and useful.</span></div>
+    <div class="field"><label for="category">Category</label><select id="category"><option>Digital Marketing</option><option>Web Development</option><option>Branding</option><option>SEO</option><option>Business Growth</option><option>Design</option></select></div>
+    <div class="field"><label for="status">Status</label><select id="status"><option value="draft">Draft</option><option value="published">Published</option></select></div>
+    <div class="field full"><label for="excerpt">Short excerpt</label><textarea id="excerpt" required maxlength="260" placeholder="A short summary shown on the blog card..."></textarea></div>
+    <div class="field full"><label for="content">Article content</label><textarea id="content" required placeholder="Write the full article here..." style="min-height:210px"></textarea><span class="hint">Plain text is used in this prototype and is safely rendered on the public blog page.</span></div>
+    <div class="modal-foot"><button class="btn" id="cancelDialog" type="button">Cancel</button><button class="btn btn-primary" type="submit">Save article</button></div>
+  </form>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  const STORE='badgerBlogPosts';
+  const demoPosts=[
+    {id:'bs-1',title:'Why Your Website Should Be Your Strongest Salesperson',slug:'website-strongest-salesperson',category:'Web Development',status:'published',excerpt:'A premium website should do more than look good. It should build trust, explain value and turn attention into qualified enquiries.',content:'A modern business website is not a digital brochure. It is often the first serious conversation a customer has with your brand.\n\nThe strongest websites make three things clear quickly: who you help, what result you create, and what the visitor should do next. Strong structure, fast loading, mobile responsiveness and persuasive content work together to reduce hesitation.\n\nAt Badger Solutions, we design websites around business goals first. Visual quality matters, but clarity, performance and conversion matter just as much.',updated:'2026-10-10'},
+    {id:'bs-2',title:'Digital Marketing in 2026: Build a System, Not Random Posts',slug:'digital-marketing-system-not-random-posts',category:'Digital Marketing',status:'published',excerpt:'Consistent growth comes from connected strategy: content, creatives, paid media, landing pages, follow-up and reporting working as one system.',content:'Posting regularly is not the same as having a marketing strategy. A strong digital marketing system connects attention to action.\n\nContent creates awareness. Creative makes people stop. Landing pages convert interest. Follow-up turns leads into conversations. Reporting shows what to improve next.\n\nWhen these pieces work together, marketing becomes measurable and easier to scale.',updated:'2026-10-09'},
+    {id:'bs-3',title:'Branding That Feels Premium Before You Say a Word',slug:'branding-that-feels-premium',category:'Branding',status:'draft',excerpt:'Premium perception is built through consistency, restraint and a clear visual system—not by adding more effects.',content:'Strong branding is a system of choices. Typography, spacing, color, photography, tone of voice and motion should all tell the same story.\n\nPremium brands often feel confident because they do less, but do it consistently. Every touchpoint should feel intentional.',updated:'2026-10-08'}
+  ];
+
+  let posts=loadPosts();
+  const $=s=>document.querySelector(s);
+  const rows=$('#postRows'), search=$('#searchInput'), statusFilter=$('#statusFilter'), categoryFilter=$('#categoryFilter');
+  const dialog=$('#postDialog'), form=$('#postForm');
+
+  function loadPosts(){try{const raw=localStorage.getItem(STORE);return raw?JSON.parse(raw):structuredClone(demoPosts)}catch(e){return structuredClone(demoPosts)}}
+  function savePosts(){localStorage.setItem(STORE,JSON.stringify(posts));render()}
+  function slugify(v){return v.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,90)}
+  function esc(v=''){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+  function dateLabel(v){const d=new Date(v+'T00:00:00');return Number.isNaN(d.getTime())?v:d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}
+  function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),2200)}
+
+  function render(){
+    const cats=[...new Set(posts.map(p=>p.category))].sort();
+    $('#totalStat').textContent=posts.length;$('#publishedStat').innerHTML='<em>'+posts.filter(p=>p.status==='published').length+'</em>';$('#draftStat').textContent=posts.filter(p=>p.status==='draft').length;$('#categoryStat').textContent=cats.length;
+    const selected=categoryFilter.value;
+    categoryFilter.innerHTML='<option value="all">All categories</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+    if(cats.includes(selected))categoryFilter.value=selected;
+    const q=search.value.trim().toLowerCase(), st=statusFilter.value, cat=categoryFilter.value;
+    const filtered=posts.filter(p=>(!q||p.title.toLowerCase().includes(q)||p.excerpt.toLowerCase().includes(q)||p.category.toLowerCase().includes(q))&&(st==='all'||p.status===st)&&(cat==='all'||p.category===cat));
+    rows.innerHTML=filtered.map(p=>`<tr><td class="title-cell"><div class="post-title">${esc(p.title)}</div><div class="slug">/blog/${esc(p.slug)}</div></td><td>${esc(p.category)}</td><td><span class="badge ${p.status==='published'?'published':''}">${p.status==='published'?'Published':'Draft'}</span></td><td>${dateLabel(p.updated)}</td><td><div class="action-set"><button class="icon-btn" type="button" title="Edit" data-edit="${p.id}">✎</button><button class="icon-btn" type="button" title="Toggle publish status" data-toggle="${p.id}">↕</button><button class="icon-btn danger" type="button" title="Delete" data-delete="${p.id}">×</button></div></td></tr>`).join('');
+    $('#emptyState').hidden=filtered.length>0;
+    $('#categoryList').innerHTML=cats.length?cats.map((c,i)=>{const n=posts.filter(p=>p.category===c).length;return `<div class="mini-item"><div class="mini-num">${String(i+1).padStart(2,'0')}</div><div><strong>${esc(c)}</strong><span>${n} article${n===1?'':'s'}</span></div><em>${Math.round(n/posts.length*100)||0}%</em></div>`}).join(''):'<div class="empty">No categories yet.</div>';
+  }
+
+  function openNew(){form.reset();$('#postId').value='';$('#dialogTitle').textContent='Create post';$('#status').value='draft';dialog.showModal()}
+  function openEdit(id){const p=posts.find(x=>x.id===id);if(!p)return;$('#postId').value=p.id;$('#title').value=p.title;$('#category').value=p.category;$('#status').value=p.status;$('#excerpt').value=p.excerpt;$('#content').value=p.content;$('#dialogTitle').textContent='Edit post';dialog.showModal()}
+
+  form.addEventListener('submit',e=>{e.preventDefault();const id=$('#postId').value;const data={title:$('#title').value.trim(),category:$('#category').value,status:$('#status').value,excerpt:$('#excerpt').value.trim(),content:$('#content').value.trim(),updated:new Date().toISOString().slice(0,10)};if(id){const i=posts.findIndex(p=>p.id===id);posts[i]={...posts[i],...data,slug:slugify(data.title)}}else{posts.unshift({id:'bs-'+Date.now(),...data,slug:slugify(data.title)})}savePosts();dialog.close();toast(id?'Article updated':'Article created')});
+  rows.addEventListener('click',e=>{const edit=e.target.closest('[data-edit]'), toggle=e.target.closest('[data-toggle]'), del=e.target.closest('[data-delete]');if(edit)openEdit(edit.dataset.edit);if(toggle){const p=posts.find(x=>x.id===toggle.dataset.toggle);if(p){p.status=p.status==='published'?'draft':'published';p.updated=new Date().toISOString().slice(0,10);savePosts();toast(p.status==='published'?'Article published':'Moved to draft')}}if(del){const p=posts.find(x=>x.id===del.dataset.delete);if(p&&confirm(`Delete “${p.title}”?`)){posts=posts.filter(x=>x.id!==p.id);savePosts();toast('Article deleted')}}});
+  [search,statusFilter,categoryFilter].forEach(el=>el.addEventListener(el===search?'input':'change',render));
+  ['#newPostTop','#newPostHero','#quickNew'].forEach(id=>$(id).addEventListener('click',openNew));
+  $('#closeDialog').addEventListener('click',()=>dialog.close());$('#cancelDialog').addEventListener('click',()=>dialog.close());
+  $('#resetDemo').addEventListener('click',()=>{if(confirm('Restore the original demo posts? This will replace current browser-only posts.')){posts=structuredClone(demoPosts);savePosts();toast('Demo posts restored')}});
+  $('#exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(posts,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='badger-blog-posts.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast('JSON exported')});
+  $('#navPosts').addEventListener('click',()=>$('#postsPanel').scrollIntoView({behavior:'smooth'}));$('#navCategories').addEventListener('click',()=>$('#categoryList').scrollIntoView({behavior:'smooth',block:'center'}));
+  const sidebar=$('#sidebar'),overlay=$('#overlay');$('#mobileMenu').addEventListener('click',()=>{sidebar.classList.add('open');overlay.classList.add('open')});overlay.addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('open')});
+  render();
+</script>
+</body>
+</html>
